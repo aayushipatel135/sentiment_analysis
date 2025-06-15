@@ -116,7 +116,7 @@ Output:
 
     🫂 "Ooh Sorry, You're Depressed!! We will get through this together :)"
 
-📂 Folder Structure
+## 📂 Folder Structure
 
 depression-detector-app/
 ├── app.py                     # Flask backend

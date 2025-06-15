@@ -1,70 +1,129 @@
-# Getting Started with Create React App
+# 🧠 Depression Detection Web App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack machine learning web application to detect signs of depression from tweets or user-entered thoughts using a trained Logistic Regression model. The app is built using **Flask (Python)** for backend and **React (JavaScript)** for frontend. The machine learning model is trained on a cleaned and processed version of a Twitter-based depression dataset.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🔍 Project Overview
 
-### `npm start`
+- Preprocessed and trained on tweet-based mental health dataset
+- Built using `pandas`, `scikit-learn`, `nltk`, and `XGBoost`
+- Vectorized using **CountVectorizer**
+- Trained models: `Logistic Regression`, `XGBoost`, `KNN` — best accuracy selected
+- Backend uses **Flask API** to predict depression
+- Frontend uses **React** to allow users to input thoughts and get predictions
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠 Technologies Used
 
-### `npm test`
+| Component    | Tech Stack                          |
+|--------------|--------------------------------------|
+| Frontend     | React, HTML, CSS                    |
+| Backend      | Flask, Flask-CORS                   |
+| ML Model     | Logistic Regression (sklearn)       |
+| Vectorizer   | CountVectorizer                     |
+| Model Format | `.pickle`                           |
+| Dataset      | Depression Dataset from Twitter     |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🚀 Project Setup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 📂 Clone the Repository
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+git clone https://github.com/your-username/depression-detector-app.git
+cd depression-detector-app
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+🔧 Backend Setup (Flask + Python)
 
-### `npm run eject`
+    Install required packages:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+pip install flask flask-cors pandas scikit-learn xgboost nltk
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    Make sure the following files exist in the backend folder:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+        logistic.pickel – Trained model
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+        vector_conversion.pickel – CountVectorizer object
 
-## Learn More
+    Start the Flask server:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+python app.py
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This will run the backend on http://localhost:5000
+🖥️ Frontend Setup (React)
 
-### Code Splitting
+    Navigate to the React app directory (e.g., client/):
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+cd client
 
-### Analyzing the Bundle Size
+    Install dependencies:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+npm install
 
-### Making a Progressive Web App
+    Start the development server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+npm start
 
-### Advanced Configuration
+This runs the frontend on http://localhost:3000
+⚙️ How It Works
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+    User enters a thought in the React frontend.
 
-### Deployment
+    React sends a POST request to the Flask backend at /predict.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+    Flask loads the vectorizer.pickle and logistic.pickle, transforms the input, and returns a prediction (0 or 1).
 
-### `npm run build` fails to minify
+    The React UI displays:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+        🎉 "Cheers, You're Not Depressed!!" if prediction is 1
+
+        🫂 "Ooh Sorry, You're Depressed!! We will get through this together :)" if prediction is 0
+
+📊 Data Preprocessing & Training Steps (Done in Colab)
+
+    Loaded and cleaned Twitter depression dataset
+
+    Replaced target label 4 with 1 for binary classification
+
+    Cleaned text (stopwords, special characters, @users, URLs)
+
+    Word clouds for positive and negative examples
+
+    Tokenization and lemmatization using nltk
+
+    Vectorized tweets using CountVectorizer
+
+    Trained and evaluated:
+
+        Logistic Regression
+
+        XGBoost
+
+        KNN
+
+    Saved final model and vectorizer using pickle	
+	
+🧪 Example
+
+Input:
+
+    "I feel broken and empty"
+
+Output:
+
+    🫂 "Ooh Sorry, You're Depressed!! We will get through this together :)"
+
+📂 Folder Structure
+
+depression-detector-app/
+├── app.py                     # Flask backend
+├── logistic.pickel            # Trained model
+├── vector_conversion.pickel   # Vectorizer
+├── /client                    # React frontend
+│   ├── src/
+│   ├── public/
+│   └── package.json
+├── README.md
